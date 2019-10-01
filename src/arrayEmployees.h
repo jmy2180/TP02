@@ -1,24 +1,20 @@
 #ifndef ARRAYEMPLOYEES_H_
 #define ARRAYEMPLOYEES_H_
 
+typedef struct {
+	char name[51];
+	char lastname[51];
+	int id;
+	float salary;
+	int sector;
+	int isEmpty; //0 si esta ocupada, -1 si esta libre
+}Employee;
 
-int getInt(char mensaje[]);
-float getFloat(char mensaje[], float auxiliar);
-char getChar (char *mensaje);
-
-void getString (char mensaje[], char input[]);
-int getStringLetras(char mensaje[],char input[]);
-int getStringNumeros(char mensaje[],char input[]);
-
-int esNumerico(char str[]) ;
-int esSoloLetras(char str[]);
-
-
-
+void initEmployees(Employee arrayEmployees[], int len);
+int buscarOcurrencia(Employee arrayEmployees[], int cantidadDeEmpleados, int valor);
+int buscarPosicionMemoriaLibre(Employee arrayEmployees[], int cantidad);
 
 
 
 
-
-
-#endif /* ARRAYEMPLOYEES_H_ */
+#endif

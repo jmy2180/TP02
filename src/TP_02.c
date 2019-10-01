@@ -2,21 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "arrayEmployees.h"
+#include "utn.h"
 
 #define EMPLEADOS 1000
 
-typedef struct {
-	char name[51];
-	char lastname[51];
-	int id;
-	float salary;
-	int sector;
-	int isEmpty; //0 si esta ocupada, -1 si esta libre
-}Employee;
-
-void initEmployees(Employee arrayEmployees[], int len);
-int buscarOcurrencia(Employee arrayEmployees[], int cantidadDeEmpleados, int valor);
-int buscarPosicionMemoriaLibre(Employee arrayEmployees[], int cantidad);
 
 int main()
 {
@@ -41,7 +30,7 @@ int main()
 
 	while (opcion !=7)
 	{
-		opcion = getInt ("\n 1- Alta\n 2- Baja\n 3- Modificacion\n 4- Listar\n 5- Ordenar\n 6- Informacion\n 7- Salir\n");
+		opcion = getIntResumida ("\n 1- Alta\n 2- Baja\n 3- Modificacion\n 4- Listar\n 5- Ordenar\n 6- Informacion\n 7- Salir\n");
 		switch (opcion)
 		{
 		case 1:
@@ -63,13 +52,13 @@ int main()
 					printf("El apellido debe contener solamente letras\n");
 					break;
 				}
-			auxiliarSector = getInt("Ingrese el sector: ");
+			auxiliarSector = getIntResumida("Ingrese el sector: ");
 			if (auxiliarSector == -1)
 				{
 					printf("El sector debe contener solamente numeros\n");
 					break;
 				}
-			if(!getFloat("Ingrese el salario: ", auxiliarSalary))
+			if(getFloat(&auxiliarSalary, "Ingrese el salario: ", "Error", 1, 99999, 5) != 0)
 				{
 					printf("El salario debe contener solamente numeros\n");
 					break;
@@ -124,13 +113,13 @@ int main()
 				printf("El apellido debe contener solamente letras\n");
 				break;
 				}
-			auxiliarSector = getInt("Ingrese el sector: ");
+			auxiliarSector = getIntResumida("Ingrese el sector: ");
 			if (auxiliarSector == -1)
 				{
 					printf("El sector debe contener solamente numeros\n");
 					break;
 				}
-			if(!getFloat("Ingrese el salario: ", auxiliarSalary))
+			if(!getFloatResumida("Ingrese el salario: ", auxiliarSalary))
 				{
 					printf("El salario debe contener solamente numeros\n");
 					break;
@@ -196,38 +185,6 @@ int main()
 return 0;
 }
 
-void initEmployees(Employee arrayEmployees[], int len)
-	{
-		int i;
-		for (i = 0 ; i < len ; i++)
-		{
-			arrayEmployees[i].isEmpty = -1;
-		}
-	}
 
-int buscarOcurrencia(Employee arrayEmployees[], int cantidadDeEmpleados, int valor)
-	{
-	int i;
-		for (i = 0 ; i < cantidadDeEmpleados ; i++)
-		{
-			if (arrayEmployees[i].id == valor)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
 
-int buscarPosicionMemoriaLibre(Employee arrayEmployees[], int cantidad)
-{
-	int i;
-	for (i = 0 ; i < cantidad ; i++)
-	{
-		if (arrayEmployees[i].isEmpty == -1)
-		{
-			return i;
-		}
-	}
-	return -1;
-}
 
